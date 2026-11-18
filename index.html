@@ -15,7 +15,10 @@
 <script>
 const STORE = {
   name: "テンポタウン鶴見倉庫",
-  // Google の Place ID。入れると Google の口コミ投稿画面が直接開きます。空なら Google マップ検索を開きます。
+  // Google の「クチコミを書く」画面のリンク（例：https://g.page/r/XXXXXXXX/review）。
+  // Google ビジネスプロフィールの「クチコミを増やす」で表示されるリンクを貼ります。最優先で使われます。
+  reviewUrl: "",
+  // reviewUrl の代わりに Google の Place ID でも口コミ画面を直接開けます。
   placeId: "",
   // 「お店にだけ伝える」を選んだ人に見せる連絡先（空なら表示しません）
   phone: ""
@@ -295,6 +298,7 @@ function generate(){
   $("draft").scrollIntoView({behavior:"smooth",block:"center"});
 }
 function reviewUrl(){
+  if(STORE.reviewUrl) return STORE.reviewUrl;
   return STORE.placeId
     ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(STORE.placeId)}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.name)}`;
