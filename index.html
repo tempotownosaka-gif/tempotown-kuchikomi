@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>テンポタウン鶴見倉庫 ご利用アンケート</title>
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Dela+Gothic+One&display=swap">
+<style>
+/* ============ お店の設定（ここを書き換えるだけで反映されます） ============ */
+</style>
+<script>
+const STORE = {
+  name: "テンポタウン鶴見倉庫",
+  // Google の Place ID。入れると Google の口コミ投稿画面が直接開きます。空なら Google マップ検索を開きます。
+  placeId: "",
+  // 「お店にだけ伝える」を選んだ人に見せる連絡先（空なら表示しません）
+  phone: ""
+};
+</script>
+<style>
+:root{
+  --bg:#f3f2ee; --surface:#ffffff; --ink:#151515; --muted:#5f5d57; --line:#dcdad3;
+  --accent:#f2b600; --accent-ink:#151515; --steel:#151515; --steel-soft:#f1eee2;
+  --f-display:"Dela Gothic One","Zen Kaku Gothic New",system-ui,sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121212; --surface:#1d1d1d; --ink:#f0eee8; --muted:#a9a69d; --line:#34322d;
+  --accent:#f5c22a; --accent-ink:#151515; --steel:#f0eee8; --steel-soft:#2a2822; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));
+  padding-top:max(12px,env(safe-area-inset-top,0px));padding-bottom:max(40px,env(safe-area-inset-bottom,0px))}
+.phone{max-width:460px;width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.phone-head{background:#fff;padding-top:18px}
+.phone-head .logo{display:block;width:78%;max-width:320px;margin:0 auto 16px}
+.hazard{height:10px;background:repeating-linear-gradient(-45deg,#f2b600 0 12px,#151515 12px 24px)}
+.band{background:#151515;color:#fff;padding:16px 20px 18px}
+.band small{color:#f2b600;font-size:12px;font-weight:700;letter-spacing:.08em}
+.band h1{font-family:var(--f-display);font-weight:400;font-size:22px;margin:2px 0 6px;text-wrap:balance;color:#fff}
+.band p{margin:0;font-size:13px;color:#e8e6df}
+.step{padding:20px;display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:0}
+.step h2{margin:0;font-size:15px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.step h2 .n{font-family:var(--f-display);font-weight:400;color:var(--accent-ink);background:var(--accent);border-radius:4px;padding:0 7px;font-size:13px;flex:none}
+.step h2 .opt{font-weight:400;font-size:12px;color:var(--muted)}
+.stars{display:flex;gap:6px}
+.stars button{appearance:none;border:0;background:none;font-size:40px;line-height:1;cursor:pointer;color:var(--line);padding:0 2px}
+.stars button.on{color:var(--accent)}
+.stars button:focus-visible{outline:2px solid var(--steel);border-radius:4px}
+.hint{font-size:12px;color:var(--muted);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--steel);border-color:var(--steel);color:var(--surface)}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choice{appearance:none;font:inherit;font-size:14px;font-weight:500;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px 12px;cursor:pointer;line-height:1.4}
+.choice small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
+.choice[aria-pressed="true"]{border:2px solid var(--accent);padding:9px 11px;background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:84px;resize:vertical}
+textarea:focus{outline:2px solid var(--steel);outline-offset:1px}
+.btn{appearance:none;font:inherit;font-weight:700;border:0;border-radius:10px;padding:14px 16px;cursor:pointer;width:100%;font-size:15px;text-align:center;text-decoration:none;display:block}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-steel{background:var(--steel);color:var(--surface)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>.btn{flex:1 1 140px}
+.draft{min-height:170px}
+.note{font-size:12px;color:var(--muted);background:var(--steel-soft);border-radius:8px;padding:10px 12px;margin:0}
+.direct{border:1px dashed var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.direct p{margin:0;font-size:13px}
+.done{text-align:center;padding:32px 20px;display:flex;flex-direction:column;gap:12px}
+.done .big{font-family:var(--f-display);font-size:22px}
+.done p{margin:0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;z-index:20}
+footer{text-align:center;font-size:11px;color:var(--muted);margin-top:16px}
+</style>
+</head>
+<body>
+<main class="phone">
+  <div class="phone-head">
+    <img class="logo" src="logo.png" alt="テンポタウン 厨房機器・事務機器の買取・販売">
+    <div class="hazard"></div>
+    <div class="band">
+      <small>ご利用ありがとうございます</small>
+      <h1 id="custTitle">テンポタウン鶴見倉庫</h1>
+      <p>1分ほどのアンケートで、口コミの下書きをお作りします。</p>
+    </div>
+  </div>
+
+  <div id="flow">
+    <section class="step">
+      <h2><span class="n">1</span>本日のご利用内容は？</h2>
+      <div class="choices" id="purpose"></div>
+    </section>
+    <section class="step">
+      <h2><span class="n">2</span>このお店、どんな方におすすめしたいですか？<span class="opt">いくつでも</span></h2>
+      <div class="chips" id="recs"></div>
+      <p class="hint" id="recsHint">先に「ご利用内容」を選ぶと、内容に合った項目が出ます。</p>
+    </section>
+    <section class="step">
+      <h2><span class="n">3</span>ご利用のきっかけは？<span class="opt">任意</span></h2>
+      <div class="chips" id="trigger"></div>
+    </section>
+    <section class="step">
+      <h2><span class="n">4</span>満足度は？</h2>
+      <div class="stars" id="stars" role="radiogroup" aria-label="満足度"></div>
+      <p class="hint" id="starHint">星をタップしてください</p>
+    </section>
+    <section class="step">
+      <h2><span class="n">5</span>良かった点は？<span class="opt">いくつでも</span></h2>
+      <div class="chips" id="points"></div>
+      <p class="hint" id="pointsHint">先に「ご利用内容」を選ぶと、内容に合った項目が出ます。</p>
+    </section>
+    <section class="step">
+      <h2><span class="n">6</span>ひとこと<span class="opt">任意</span></h2>
+      <textarea id="memo" placeholder="例：開業準備で製氷機と冷蔵庫をまとめて購入。動作確認済みで安心でした。"></textarea>
+      <button class="btn btn-steel" id="genBtn" disabled>口コミの下書きを作る</button>
+      <p class="hint" id="genHint">「ご利用内容」と「満足度」を選ぶと押せます。</p>
+    </section>
+    <section class="step" id="draftStep" hidden>
+      <h2><span class="n">7</span>下書きを確認・編集</h2>
+      <textarea class="draft" id="draft"></textarea>
+      <p class="note">これはあくまで下書きです。ご自身の言葉に自由に書き直してください。投稿するかどうかもお客様の自由です。</p>
+      <div class="row">
+        <button class="btn btn-ghost" id="regenBtn">別の言い回しにする</button>
+        <button class="btn btn-primary" id="postBtn">コピーして Google に投稿</button>
+      </div>
+      <div class="direct" id="direct" hidden>
+        <p>ご不便をおかけした点があれば、お店に直接お伝えいただくこともできます。</p>
+        <button class="btn btn-ghost" id="directBtn">お店にだけ伝える</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="done" id="doneView" hidden>
+    <div class="big" id="doneTitle">ありがとうございました</div>
+    <p id="doneText"></p>
+    <a class="btn btn-primary" id="reopenLink" target="_blank" rel="noopener">Google の投稿画面を開く</a>
+    <button class="btn btn-ghost" id="restartBtn">最初に戻る</button>
+  </div>
+</main>
+<footer>テンポタウン 厨房機器・事務機器の買取・販売</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const PURPOSES = [
+  {id:"buy",  label:"中古厨房機器を購入", sub:"店頭・配送"},
+  {id:"sell", label:"厨房機器を買取に出した", sub:"店頭・出張買取"},
+  {id:"both", label:"購入と買取の両方", sub:"入れ替えなど"},
+  {id:"look", label:"見に来た・相談した", sub:"今回は購入なし"}
+];
+const TRIGGERS = ["飲食店の開業準備","機器の買い替え・増設","閉店・移転","故障したので急ぎ","その他"];
+const POINTS = {
+  buy: ["価格が安い","品揃えが豊富","状態がきれい","動作確認済みで安心","保証があって安心","配送・搬入が助かった","スタッフが詳しい","その場で持ち帰れた"],
+  sell:["買取価格に納得","査定が早い","出張買取が便利","まとめて引き取ってくれた","古い機器も見てくれた","説明が丁寧","搬出をやってくれた","連絡がスムーズ"],
+  look:["品揃えが豊富","スタッフが詳しい","相談しやすい","店内が見やすい","価格が分かりやすい","駐車場が便利"]
+};
+const RECS = {
+  buy: ["これから飲食店を開業する方","厨房機器を安く揃えたい方","急ぎで機器が必要な方","キッチンカーや小さなお店の方","新品か中古か迷っている方"],
+  sell:["閉店・移転で機器を処分したい方","使っていない厨房機器がある方","買い替えで古い機器を手放したい方","大型機器の搬出に困っている方"],
+  look:["これから飲食店を開業する方","厨房機器を安く揃えたい方","新品か中古か迷っている方","機器のことを相談したい方"]
+};
+const STAR_LABEL = ["","不満","やや不満","ふつう","満足","大満足"];
+const POINT_TEXT = {
+  "価格が安い":["価格も手ごろでした。","新品よりかなり安く揃えられました。"],
+  "品揃えが豊富":["品数が多く、比べながら選べました。","在庫が多くて選びやすかったです。"],
+  "状態がきれい":["中古とは思えないくらいきれいな状態でした。","状態の良い物が多かったです。"],
+  "動作確認済みで安心":["動作確認がされていて安心でした。"],
+  "保証があって安心":["保証が付いていたのも安心できました。"],
+  "配送・搬入が助かった":["配送と搬入までお願いできて助かりました。"],
+  "スタッフが詳しい":["スタッフの方が機器に詳しく、相談しやすかったです。","スタッフの方の説明が分かりやすかったです。"],
+  "その場で持ち帰れた":["その日のうちに持ち帰れたのも助かりました。"],
+  "買取価格に納得":["買取価格にも納得できました。","思っていたより良い金額で買い取ってもらえました。"],
+  "査定が早い":["査定がとても早かったです。","査定がスピーディーでした。"],
+  "出張買取が便利":["出張買取で店まで来てもらえて便利でした。"],
+  "まとめて引き取ってくれた":["まとめて引き取ってもらえて助かりました。"],
+  "古い機器も見てくれた":["年数の経った機器もきちんと見てもらえました。"],
+  "説明が丁寧":["査定の説明も丁寧でした。"],
+  "搬出をやってくれた":["重い機器の搬出までやってもらえました。"],
+  "連絡がスムーズ":["日程の連絡もスムーズでした。"],
+  "相談しやすい":["気軽に相談できる雰囲気でした。"],
+  "店内が見やすい":["店内が見やすく、探しやすかったです。"],
+  "価格が分かりやすい":["価格表示が分かりやすかったです。"],
+  "駐車場が便利":["駐車場があって行きやすかったです。"]
+};
+
+const $ = id => document.getElementById(id);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const blank = () => ({purpose:null, recs:new Set(), trigger:null, rating:0, points:new Set(), last:""});
+let state = blank();
+function toast(msg){const t=$("toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,2600)}
+
+function pointOptions(){
+  if(!state.purpose) return [...new Set([...POINTS.buy.slice(0,4),...POINTS.sell.slice(0,4)])];
+  if(state.purpose==="both") return [...new Set([...POINTS.buy.slice(0,5),...POINTS.sell.slice(0,5)])];
+  return POINTS[state.purpose];
+}
+function recOptions(){
+  if(!state.purpose) return [...new Set([...RECS.buy.slice(0,3),...RECS.sell.slice(0,2)])];
+  if(state.purpose==="both") return [...new Set([...RECS.buy.slice(0,3),...RECS.sell.slice(0,3)])];
+  return RECS[state.purpose];
+}
+function chipGroup(boxId, options, isOn, toggle){
+  const box=$(boxId);box.innerHTML="";
+  options.forEach(o=>{
+    const b=document.createElement("button");
+    b.type="button";b.className="chip";b.textContent=o;
+    b.setAttribute("aria-pressed",isOn(o));
+    b.onclick=()=>{toggle(o);render()};
+    box.appendChild(b);
+  });
+}
+function render(){
+  const pbox=$("purpose");pbox.innerHTML="";
+  PURPOSES.forEach(p=>{
+    const b=document.createElement("button");b.type="button";b.className="choice";
+    b.setAttribute("aria-pressed",state.purpose===p.id);
+    b.append(p.label);const s=document.createElement("small");s.textContent=p.sub;b.appendChild(s);
+    b.onclick=()=>{state.purpose=p.id;const po=pointOptions(),ro=recOptions();
+      state.points=new Set([...state.points].filter(x=>po.includes(x)));state.recs=new Set([...state.recs].filter(x=>ro.includes(x)));render()};
+    pbox.appendChild(b);
+  });
+  chipGroup("recs",recOptions(),o=>state.recs.has(o),o=>state.recs.has(o)?state.recs.delete(o):state.recs.add(o));
+  chipGroup("trigger",TRIGGERS,o=>state.trigger===o,o=>state.trigger=state.trigger===o?null:o);
+  chipGroup("points",pointOptions(),o=>state.points.has(o),o=>state.points.has(o)?state.points.delete(o):state.points.add(o));
+  $("recsHint").hidden=!!state.purpose;$("pointsHint").hidden=!!state.purpose;
+  const box=$("stars");box.innerHTML="";
+  for(let i=1;i<=5;i++){
+    const b=document.createElement("button");
+    b.type="button";b.textContent="★";b.setAttribute("role","radio");
+    b.setAttribute("aria-label",`${i}つ星 ${STAR_LABEL[i]}`);b.setAttribute("aria-checked",state.rating===i);
+    if(i<=state.rating)b.classList.add("on");
+    b.onclick=()=>{state.rating=i;$("starHint").textContent=STAR_LABEL[i];render()};
+    box.appendChild(b);
+  }
+  const ready=!!(state.purpose&&state.rating);
+  $("genBtn").disabled=!ready;$("genHint").hidden=ready;
+}
+
+function triggerPhrase(){
+  const t=state.trigger;
+  if(state.purpose==="sell" && (t==="飲食店の開業準備"||t==="故障したので急ぎ")) return "";
+  return ({"飲食店の開業準備":"飲食店の開業準備のため、","機器の買い替え・増設":"厨房機器の入れ替えのため、","閉店・移転":"店舗の閉店・移転にあたり、","故障したので急ぎ":"機器が急に故障してしまい、"})[t]||"";
+}
+function recPhrase(){
+  const r=[...state.recs].slice(0,2);
+  if(!r.length) return "";
+  return r.length===1 ? r[0] : r[0].replace(/方$/,"方や")+r[1];
+}
+function draftOnce(){
+  const n=STORE.name, rp=recPhrase(), tr=triggerPhrase(), r=state.rating;
+  const pts=[...state.points], memo=$("memo").value.trim();
+  let open;
+  if(state.purpose==="buy") open = pick([
+    `${tr}中古の厨房機器を探していて、${n}を利用しました。`,
+    `${tr}${n}で中古の厨房機器を購入しました。`,
+    `${tr}${n}で中古の厨房機器を揃えました。`
+  ]);
+  else if(state.purpose==="sell") open = pick([
+    `${tr}使わなくなった厨房機器の買取を${n}にお願いしました。`,
+    `${tr}${n}に厨房機器の買取をお願いしました。`
+  ]);
+  else if(state.purpose==="both") open = pick([
+    `${tr}${n}に厨房機器の買取と、中古の厨房機器の購入をまとめてお願いしました。`,
+    `${tr}使っていた機器の買取と、入れ替え用の中古厨房機器の購入で${n}を利用しました。`
+  ]);
+  else open = `${tr}${n}に中古の厨房機器を見に行きました。`;
+  const mid = pts.slice(0,3).map(p=>pick(POINT_TEXT[p]||[p+"のが良かったです。"])).join("");
+  const m = memo ? memo.replace(/[。．.!！]?$/,"。") : "";
+  const rec = state.purpose==="sell" ? "厨房機器の処分や買取を考えている方にもおすすめです。"
+            : state.purpose==="both" ? "機器の入れ替えを考えている方にもおすすめです。"
+            : "中古の厨房機器を探している方にもおすすめです。";
+  const close = r>=4 && rp ? pick([`${rp}におすすめです。`,`${rp}には特におすすめしたいお店です。`])
+              : r>=4 ? pick(["また機会があれば利用したいです。","厨房機器のことでまた相談したいと思います。",rec])
+              : r===3 && rp ? `${rp}は一度見てみると良いと思います。`
+              : r===3 ? "機会があればまた寄ってみます。" : "今後の改善に期待しています。";
+  return (open+mid+m+close).replace(/。。/g,"。").replace(/、、/g,"、");
+}
+function makeDraft(){
+  let d=draftOnce();
+  for(let i=0;i<8&&d===state.last;i++) d=draftOnce();
+  state.last=d; return d;
+}
+function generate(){
+  $("draftStep").hidden=false;
+  $("draft").value=makeDraft();
+  $("direct").hidden = state.rating>3;
+  $("draft").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function reviewUrl(){
+  return STORE.placeId
+    ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(STORE.placeId)}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.name)}`;
+}
+async function copyText(t){
+  try{await navigator.clipboard.writeText(t);return true}catch{}
+  try{const ta=$("draft");ta.focus();ta.select();ta.setSelectionRange(0,t.length);return document.execCommand("copy")}catch{return false}
+}
+$("postBtn").onclick=async()=>{
+  const ok=await copyText($("draft").value);
+  window.open(reviewUrl(),"_blank","noopener");
+  $("flow").hidden=true;$("doneView").hidden=false;$("reopenLink").hidden=false;$("reopenLink").href=reviewUrl();
+  $("doneTitle").textContent="ありがとうございました";
+  $("doneText").textContent= ok ? "下書きをコピーしました。Google の画面で「クチコミを書く」を開き、貼り付けてご投稿ください。" : "コピーできませんでした。「最初に戻る」から文章を長押しでコピーしてください。";
+  scrollTo(0,0);
+};
+$("directBtn").onclick=()=>{
+  $("flow").hidden=true;$("doneView").hidden=false;$("reopenLink").hidden=true;
+  $("doneTitle").textContent="お知らせいただきありがとうございます";
+  $("doneText").textContent= STORE.phone
+    ? `お手数ですが、店頭スタッフにお声がけいただくか、お電話（${STORE.phone}）でお知らせください。改善に役立てます。`
+    : "お手数ですが、店頭スタッフにお声がけください。いただいたご意見は改善に役立てます。";
+  scrollTo(0,0);
+};
+$("restartBtn").onclick=()=>{
+  state=blank();$("memo").value="";$("draft").value="";$("starHint").textContent="星をタップしてください";
+  $("draftStep").hidden=true;$("flow").hidden=false;$("doneView").hidden=true;
+  render();scrollTo(0,0);
+};
+$("genBtn").onclick=generate;
+$("regenBtn").onclick=()=>{$("draft").value=makeDraft()};
+
+$("custTitle").textContent=STORE.name;
+render();
+</script>
+</body>
+</html>
